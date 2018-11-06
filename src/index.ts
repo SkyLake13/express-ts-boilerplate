@@ -1,5 +1,11 @@
+import http from 'http';
+
 import * as app from './app.express';
 
-app.expressApp.listen('4300', () => {
+
+
+const server = http.createServer(app.expressApp);
+
+server.listen('4300', () => {
     console.log('Listening at 4300');
 });
