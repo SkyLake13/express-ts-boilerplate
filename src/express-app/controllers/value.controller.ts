@@ -2,7 +2,7 @@
 import { BaseController } from "./base.controller";
 import { Request, Response } from "express";
 import ValueService from "../services/value.service";
-import { Value } from "../models/value.model";
+import { Value } from "../../models/value.model";
 
 export default class ValueController extends BaseController {
     constructor(private valueService: ValueService) {

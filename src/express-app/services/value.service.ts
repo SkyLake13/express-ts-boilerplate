@@ -1,4 +1,4 @@
-import { Value } from "../models/value.model";
+import { Value } from "../../models/value.model";
 
 
 export default class ValueService {
