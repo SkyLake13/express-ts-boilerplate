@@ -1,5 +1,5 @@
 import express from 'express';
-import { authorize } from '../authorize';
+import { authorize } from '../middlewares/authorize';
 import { User } from '../database/Connection';
 import { IUser } from '../database/User';
 
