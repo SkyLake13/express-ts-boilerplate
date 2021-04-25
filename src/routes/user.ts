@@ -1,16 +1,17 @@
 import express from 'express';
-import { authorize } from './authorize';
-import { User } from './database/Connection';
-import { IUser } from './database/User';
+import { authorize } from '../authorize';
+import { User } from '../database/Connection';
+import { IUser } from '../database/User';
 
 interface IBasicUser {
-    id: string; name: string; email: string, userName: string, phone: string, verified: boolean
+    id: string; name: string; email: string, userName: string, 
+    phone: string, verified: boolean
 }
 
-const userManager = express();
-userManager.use(authorize)
+const user = express.Router();
+// userManager.use(authorize)
 
-userManager.get('/', (_req, res) => {
+user.get('/', (_req, res) => {
     User.find().then((_users: IUser[]) => {
         const users = _users.map((u) => {
             return { 
@@ -28,7 +29,7 @@ userManager.get('/', (_req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-userManager.get('/:id', (req, res) => {
+user.get('/:id', (req, res) => {
     const id = req.params['id'];
 
     User.findById(id).then((u: IUser | null) => {
@@ -50,4 +51,4 @@ userManager.get('/:id', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-export default userManager;
+export default user;
