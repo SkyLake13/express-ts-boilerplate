@@ -1,11 +1,11 @@
 import express from 'express';
 import helmet from 'helmet';
 import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 import user from './routes/user';
-
-const PORT = 3000;
+import root from './routes/root';
 
 const app = express();
 
@@ -15,11 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
+app.use('/', root);
 app.use('/user', user);
 
-//Root endpoint
-app.get('/', (_req, res) => {
-    res.status(200).send('Hello there !!!');
-});
+const port = (process.env as any).PORT;
 
-app.listen(PORT, () => console.log(`app started at port ${PORT}`));
+app.listen(port, () => console.log(`app started at port ${port}`));

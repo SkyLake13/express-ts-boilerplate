@@ -1,11 +1,10 @@
 import express from 'express';
-import { authorize } from '../middlewares/authorize';
+// import { authorize } from '../middlewares/authorize';
 import { User } from '../database/Connection';
 import { IUser } from '../database/User';
 
 interface IBasicUser {
-    id: string; name: string; email: string, userName: string, 
-    phone: string, verified: boolean
+    id: string; name: string; email: string
 }
 
 const user = express.Router();
@@ -17,10 +16,7 @@ user.get('/', (_req, res) => {
             return { 
                 id: u.id,
                 name: u.name, 
-                email: u.email, 
-                userName: u.userName, 
-                phone: u.phone,
-                verified: u.verified
+                email: u.email
             } as IBasicUser;
         });
 
@@ -37,10 +33,7 @@ user.get('/:id', (req, res) => {
             const users =  {
                 id: u.id,
                 name: u.name, 
-                email: u.email, 
-                userName: u.userName, 
-                phone: u.phone,
-                verified: u.verified
+                email: u.email
             } as IBasicUser;
 
             return res.status(200).send(users);
