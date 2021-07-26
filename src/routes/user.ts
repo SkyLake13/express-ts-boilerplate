@@ -1,47 +1,26 @@
 import express from 'express';
+import { getUser, getUsers } from '../services/user.service';
 // import { authorize } from '../middlewares/authorize';
-import { User } from '../database/Connection';
-import { IUser } from '../database/User';
-
-interface IBasicUser {
-    id: string; name: string; email: string
-}
 
 const user = express.Router();
 // userManager.use(authorize)
 
-user.get('/', (_req, res) => {
-    User.find().then((_users: IUser[]) => {
-        const users = _users.map((u) => {
-            return { 
-                id: u.id,
-                name: u.name, 
-                email: u.email
-            } as IBasicUser;
-        });
+user.get('/', async (_req, res) => {
+    const users = await getUsers();
 
-        res.status(200).send(users);
-    })
-    .catch((err) => res.status(500).send(err));
+    res.status(200).send(users);
 });
 
-user.get('/:id', (req, res) => {
+user.get('/:id', async (req, res) => {
     const id = req.params['id'];
 
-    User.findById(id).then((u: IUser | null) => {
-        if(u) {
-            const users =  {
-                id: u.id,
-                name: u.name, 
-                email: u.email
-            } as IBasicUser;
+    const user = await getUser(id);
+    if(user) {
+        res.status(200).send(user);
+        return;
+    }
 
-            return res.status(200).send(users);
-        }
-
-        return res.status(404).send('Not found');
-    })
-    .catch((err) => res.status(500).send(err));
+    res.status(404).send('User not found.');
 });
 
 export default user;
