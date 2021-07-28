@@ -1,8 +1,7 @@
-import { Schema, Document } from 'mongoose';
+import { Schema } from 'mongoose';
+import { UserModel } from '../models';
 
-import { IUser } from '../models/iuser';
-
-export const userSchema = new Schema<IUser & Document>({
+export const userSchema = new Schema<UserModel>({
     name: {
         type: String,
         required: true

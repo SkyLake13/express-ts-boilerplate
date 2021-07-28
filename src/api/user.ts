@@ -1,10 +1,8 @@
 import express from 'express';
-import { getUser, getUsers } from '../../services/user.service';
-import { failure, success } from '../utils';
-// import { authorize } from '../middlewares/authorize';
+import { getUser, getUsers } from '../domain-service';
+import { failure, success } from './utils';
 
 const user = express.Router();
-// userManager.use(authorize)
 
 user.get('/', async (_req, res, next) => {
     try {
@@ -26,4 +24,4 @@ user.get('/:id', async (req, res) => {
     return failure(res, 'User not found.', 404);
 });
 
-export default user;
+export { user };

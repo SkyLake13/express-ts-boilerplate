@@ -1,7 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import user from './routes/user/user';
-import root from './routes/root';
+import { routes } from './api';
 import { errorLogger, errorResponder, failSafeErrorHandler } from './middlewares/error-handler';
 
 const app = express();
@@ -12,8 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use('/', root);
-app.use('/user', user);
+app.use('/', routes);
 
 app.use(errorLogger);
 app.use(errorResponder);
