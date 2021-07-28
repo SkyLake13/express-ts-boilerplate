@@ -1,6 +1,6 @@
 import { Schema, Document } from 'mongoose';
 
-import { IUser } from './models/iuser';
+import { IUser } from '../models/iuser';
 
 export const userSchema = new Schema<IUser & Document>({
     name: {
@@ -10,8 +10,9 @@ export const userSchema = new Schema<IUser & Document>({
     email: {
         type: String,
         lowercase: true,
-        unique: true,
-        required: true
+        // unique: true,
+        required: true,
+        validate: [ () => true, 'invalid email' ]
     },
     password: {
         type: String,

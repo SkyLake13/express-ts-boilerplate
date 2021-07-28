@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { sign, verify } from "jsonwebtoken";
 
 const privateKey = (process.env as any).JWT_PRIVATE_KEY;
@@ -13,7 +13,7 @@ function verifyToken(token: string) {
     return verify(token, privateKey);
 }
 
-export function authorize(req: Request, res: Response, next: any) {
+export function authorize(req: Request, res: Response, next: NextFunction) {
     const authheader = req.headers.authorization;
     if(authheader && (authheader.indexOf('Bearer ') > -1)) {
         const token = authheader.split(' ')[1];

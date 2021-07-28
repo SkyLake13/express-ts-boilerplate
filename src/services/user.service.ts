@@ -1,10 +1,7 @@
 import { User } from '../database/connection';
+import { IUserModel } from '../routes/user/models';
 
-interface IBasicUser {
-    id: string; name: string; email: string
-}
-
-export async function getUsers(): Promise<IBasicUser[]> {
+export async function getUsers(): Promise<IUserModel[]> {
     const users = await User.find();
 
     const mappedUsers = users.map((u) => {
@@ -12,13 +9,13 @@ export async function getUsers(): Promise<IBasicUser[]> {
             id: u.id,
             name: u.name, 
             email: u.email
-        } as IBasicUser;
-    });
+        } as IUserModel;
+    });   
 
     return mappedUsers;
 }
 
-export async function getUser(id: string): Promise<IBasicUser | null> {
+export async function getUser(id: string): Promise<IUserModel | null> {
     const u = await User.findById(id);
 
     if(u) {
@@ -26,7 +23,7 @@ export async function getUser(id: string): Promise<IBasicUser | null> {
             id: u.id,
             name: u.name, 
             email: u.email
-        } as IBasicUser;
+        } as IUserModel;
 
         return mappedUser;
     }

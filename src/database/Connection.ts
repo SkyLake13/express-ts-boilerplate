@@ -2,7 +2,7 @@ import { createConnection, Document } from 'mongoose';
 
 import { DB_CONNECTION } from '../config';
 import { IUser } from './models/iuser';
-import { userSchema } from './user';
+import { userSchema } from './schemas/user';
 
 function makeDbConnection(connectionString: string) {
     const dbConnection = createConnection(connectionString, 
