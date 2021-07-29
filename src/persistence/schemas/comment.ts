@@ -11,7 +11,7 @@ export const commentSchema = new Schema<CommentModel>({
         required: true,
     },
     movie_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true,
     },
     text: {
