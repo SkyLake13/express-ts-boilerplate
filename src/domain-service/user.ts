@@ -10,7 +10,7 @@ export async function getUsers(): Promise<UserModel[]> {
             name: u.name, 
             email: u.email
         } as UserModel;
-    });   
+    });
 
     return mappedUsers;
 }

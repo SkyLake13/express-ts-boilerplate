@@ -38,7 +38,6 @@ const run = () => {
     return server.listen(PORT, () => {
         console.log(`Server is listening at port ${PORT}`);
     });
-
 }
 
 process.on('uncaughtException', err => {
