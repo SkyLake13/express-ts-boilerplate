@@ -1,9 +1,13 @@
 import express from 'express';
+import { publish } from '../amqp';
 import { NewComment } from '../api-contracts';
-import { addComment, getComments, getCommentsByEmail } from '../domain-service';
+import { subs } from '../application/comment';
+import { getComments, getCommentsByEmail } from '../domain-service';
 import { success } from './utils';
 
 const comment = express.Router();
+
+subs().then();
 
 comment.get('/', async (req, res, next) => {
     try {
@@ -23,15 +27,17 @@ comment.get('/', async (req, res, next) => {
 comment.post('/', async (req, res, next) => {
     try {
         const commentDto = req.body as NewComment;
-        let _comment = {
-            ...commentDto
-        };
-        _comment= await addComment(_comment);
+        const comment = new CommandEvent(commentDto.email, commentDto.text, commentDto.movie_id);
+        publish(comment);
     
-        success(res, _comment, 200);
+        success(res, '', 200);
     } catch(err) {
         next(err);
     }
 });
+
+export class CommandEvent {
+    constructor(public email: string, public text: string, public movie_id: string) {}
+}
 
 export { comment };
