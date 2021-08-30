@@ -3,7 +3,7 @@ import https from 'https';
 import fs from 'fs';
 import { Express } from 'express';
 
-import { app } from './app';
+import app from './app';
 import { IS_PRODUCTION, PORT, SECURE_SERVER_CERT, SECURE_SERVER_KEY } from '../configurations';
 
 const buildServerOptions = (): https.ServerOptions => {

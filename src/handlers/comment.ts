@@ -1,12 +1,12 @@
 import { messageBus } from '../providers/message-bus.provider';
 import { commentService } from '../providers';
-import { CommandEvent } from '../api/routes/comment';
+import { CreateCommentCommand } from '../handler-contracts';
 
 
 export async function commentCommandHandler() {
     const amqp =  await messageBus;
 
-    amqp.subscribe('CommandEvent', async (command: CommandEvent) => {
+    amqp.subscribe(CreateCommentCommand.commandName, async (command: CreateCommentCommand) => {
         let _comment = {
                 ...command
         };

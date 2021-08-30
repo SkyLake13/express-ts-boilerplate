@@ -17,4 +17,4 @@ app.use(errorLogger);
 app.use(errorResponder);
 app.use(failSafeErrorHandler);
 
-export { app }
+export default app;

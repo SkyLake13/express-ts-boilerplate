@@ -1,4 +1,4 @@
-import { CommentService, UserService } from "../domain-service";
+import { CommentService, UserService } from "../domain-services";
 import { models } from "../persistence";
 import { DB_CONNECTION } from "../configurations";
 

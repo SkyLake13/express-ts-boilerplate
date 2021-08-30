@@ -8,7 +8,7 @@ export class MovieService {
     }
 
     public async getMovies() {
-        const movies = await this.movie.find();
+        const movies = await this.movie.find().limit(100);
         return movies;
     }
 }

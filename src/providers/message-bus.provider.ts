@@ -3,7 +3,7 @@ import { AMQP_URL } from "../configurations";
 
 async function messageBusProvider() {
     const amqpClient = new Amqp();
-    amqpClient.connect(AMQP_URL);
+    await amqpClient.connect(AMQP_URL);
     
     return amqpClient;
 }

@@ -7,7 +7,7 @@ export class CommentService {
     constructor(private readonly comment: Model<CommentEntity>) { }
 
     public async getComments() {
-        const comments = await this.comment.find();
+        const comments = await this.comment.find().limit(100);
     
         return comments;
     }
