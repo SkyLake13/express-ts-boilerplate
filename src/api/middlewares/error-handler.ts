@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { logger } from '../../core/logger/logger';
+import { logger } from "../../providers";
+import { failure } from "../utils";
 
 export function errorLogger(err: Error, req: Request, res: Response, next: NextFunction) {
     err && logger.error(err);
@@ -8,7 +9,7 @@ export function errorLogger(err: Error, req: Request, res: Response, next: NextF
 }
 
 export function errorResponder(err: Error, req: Request, res: Response, next: NextFunction) {
-    err && res.status(500).send({ message: 'Something went wrong, check logs' });
+    err && failure(res, { message: 'Something went wrong, check logs' }, 500);
 
     return next(err);
 }

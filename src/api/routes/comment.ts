@@ -1,8 +1,8 @@
 import express from 'express';
-import { success } from './utils';
 import { CommentDto } from '../contracts';
 import { commentService, messageBus } from '../../providers';
 import { CreateCommentCommand } from '../../handler-contracts';
+import { success } from '../utils';
 
 const router = express.Router();
 

@@ -5,6 +5,7 @@ import { Express } from 'express';
 
 import app from './app';
 import { IS_PRODUCTION, PORT, SECURE_SERVER_CERT, SECURE_SERVER_KEY } from '../configurations';
+import { logger } from '../providers';
 
 const buildServerOptions = (): https.ServerOptions => {
     const key = fs.readFileSync(SECURE_SERVER_KEY);
@@ -35,7 +36,7 @@ export function run() {
     }
 
     return server.listen(PORT, () => {
-        console.log(`Server is listening at port ${PORT}`);
+        logger.info(`Server is listening at port ${PORT}`);
     });
 }
 

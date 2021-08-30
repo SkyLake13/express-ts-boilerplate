@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 
-import { failure, success } from './utils';
+import { failure, success } from '../utils';
 import { userService, redisClient } from '../../providers';
 
 const USERS_KEY = 'USERS';
