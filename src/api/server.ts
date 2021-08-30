@@ -4,7 +4,7 @@ import fs from 'fs';
 import { Express } from 'express';
 
 import { app } from './app';
-import { IS_PRODUCTION, PORT, SECURE_SERVER_CERT, SECURE_SERVER_KEY } from './config';
+import { IS_PRODUCTION, PORT, SECURE_SERVER_CERT, SECURE_SERVER_KEY } from '../configurations';
 
 const buildServerOptions = (): https.ServerOptions => {
     const key = fs.readFileSync(SECURE_SERVER_KEY);
@@ -25,7 +25,7 @@ const createHttpsServer = (app: Express) => {
     return https.createServer(options, app)
 }
 
-const run = () => {
+export function run() {
     let server;
 
     if (IS_PRODUCTION) {
@@ -39,23 +39,6 @@ const run = () => {
     });
 }
 
-process.on('uncaughtException', err => {
-    console.error('There was an uncaught error', err);
-    process.exit(1);
-});
-
-process.on('unhandledRejection', err => {
-    console.error('There was an uncaught error', err);
-    process.exit(1);
-});
-
-const server = run(); // start the application
-
-process.on('SIGTERM', () => {
-    server.close(() => {
-        console.log('Process terminated.');
-    });
-});
 
 
 

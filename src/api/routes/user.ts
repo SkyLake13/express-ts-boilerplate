@@ -1,26 +1,25 @@
 import express, { Request, Response, NextFunction } from 'express';
 
-import { getUser, getUsers } from '../domain-service';
 import { failure, success } from './utils';
-import { redisClient } from '../redis';
+import { userService, redisClient } from '../../providers';
 
 const USERS_KEY = 'USERS';
 
-const user = express.Router();
+const router = express.Router();
 
-user.get('/', usersCache, async (_req, res, next) => {
+router.get('/', usersCache, async (_req, res, next) => {
     try {
-        const users = await getUsers();
+        const users = await userService.getUsers();
         success(res, users);
     } catch(err) {
         next(err);
     }
 });
 
-user.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const id = req.params['id'];
 
-    const user = await getUser(id);
+    const user = await userService.getUser(id);
     if(user) {
         return success(res, user);
     }
@@ -28,7 +27,7 @@ user.get('/:id', async (req, res) => {
     return failure(res, 'User not found.', 404);
 });
 
-export { user };
+export default router;
 
 async function usersCache(req: Request, res: Response, next: NextFunction) {
     const users = await redisClient.get(USERS_KEY);

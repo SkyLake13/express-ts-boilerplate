@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { logger } from '../logger/logger';
+import { logger } from '../../core/logger/logger';
 
 export function errorLogger(err: Error, req: Request, res: Response, next: NextFunction) {
     err && logger.error(err);

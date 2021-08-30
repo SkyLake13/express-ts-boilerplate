@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { UserModel } from '../models';
+import { UserEntity } from '../entities';
 
-export const userSchema = new Schema<UserModel>({
+export const userSchema = new Schema<UserEntity>({
     name: {
         type: String,
         required: true
@@ -9,7 +9,7 @@ export const userSchema = new Schema<UserModel>({
     email: {
         type: String,
         lowercase: true,
-        // unique: true,
+        unique: true,
         required: true,
         validate: [ () => true, 'invalid email' ]
     },
@@ -17,6 +17,9 @@ export const userSchema = new Schema<UserModel>({
         type: String,
         required: true
     }
+},
+{
+    timestamps: true
 });
 
 

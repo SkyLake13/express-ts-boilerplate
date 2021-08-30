@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { CommentModel } from '../models';
+import { CommentEntity } from '../entities';
 
-export const commentSchema = new Schema<CommentModel>({
+export const commentSchema = new Schema<CommentEntity>({
     name: {
         type: String,
         required: true
@@ -12,6 +12,7 @@ export const commentSchema = new Schema<CommentModel>({
     },
     movie_id: {
         type: Schema.Types.ObjectId,
+        ref: 'movie',
         required: true,
     },
     text: {
@@ -21,4 +22,7 @@ export const commentSchema = new Schema<CommentModel>({
     date: {
         type: Date
     }
+},
+{
+    timestamps: true
 });

@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import { routes } from './api';
+import { routes } from './routes';
 import { errorLogger, errorResponder, failSafeErrorHandler } from './middlewares/error-handler';
 
 const app = express();

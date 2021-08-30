@@ -1,3 +1,3 @@
-export interface IUserModel {
+export interface UserDto {
     id: string; name: string; email: string
 }

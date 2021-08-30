@@ -1,5 +1,5 @@
-export interface IMovie {
-    id: string;
+export interface MovieEntity {
+    _id: string;
     plot: string;
     genres: string[];
     runtime: number;

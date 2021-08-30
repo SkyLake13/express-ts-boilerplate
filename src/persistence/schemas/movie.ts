@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { MovieModel } from '../models';
+import { MovieEntity } from '../entities';
 
-export const movieSchema = new Schema<MovieModel> ({
+export const movieSchema = new Schema<MovieEntity> ({
     plot: {
         type: String
     },
@@ -85,4 +85,7 @@ export const movieSchema = new Schema<MovieModel> ({
             type: Date
         }
     }
+},
+{
+    timestamps: true
 });

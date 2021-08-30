@@ -1,2 +1,3 @@
-export * from './user';
-export * from './comment';
+export * from './user.service';
+export * from './comment.service';
+export * from './movie.service';
