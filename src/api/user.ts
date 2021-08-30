@@ -11,8 +11,6 @@ const user = express.Router();
 user.get('/', usersCache, async (_req, res, next) => {
     try {
         const users = await getUsers();
-        await redisClient.set(USERS_KEY, JSON.stringify(users));
-
         success(res, users);
     } catch(err) {
         next(err);

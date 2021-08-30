@@ -4,8 +4,7 @@ import fs from 'fs';
 import { Express } from 'express';
 
 import { app } from './app';
-import { PORT, SECURE_SERVER_CERT, SECURE_SERVER_KEY } from './config';
-import { PRODUCTION } from './constants';
+import { IS_PRODUCTION, PORT, SECURE_SERVER_CERT, SECURE_SERVER_KEY } from './config';
 
 const buildServerOptions = (): https.ServerOptions => {
     const key = fs.readFileSync(SECURE_SERVER_KEY);
@@ -29,7 +28,7 @@ const createHttpsServer = (app: Express) => {
 const run = () => {
     let server;
 
-    if (process.env.NODE_ENV === PRODUCTION) {
+    if (IS_PRODUCTION) {
         server = createHttpsServer(app);
     } else {
         server = createHttpServer(app);
