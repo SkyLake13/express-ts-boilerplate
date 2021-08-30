@@ -45,6 +45,11 @@ process.on('uncaughtException', err => {
     process.exit(1);
 });
 
+process.on('unhandledRejection', err => {
+    console.error('There was an uncaught error', err);
+    process.exit(1);
+});
+
 const server = run(); // start the application
 
 process.on('SIGTERM', () => {

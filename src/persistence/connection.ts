@@ -1,9 +1,10 @@
 import { createConnection } from 'mongoose';
 
 import { DB_CONNECTION } from '../config';
-import { CommentModel, UserModel } from './models';
+import { CommentModel, MovieModel, UserModel } from './models';
 import { commentSchema } from './schemas/comment';
 import { userSchema } from './schemas/user';
+import { movieSchema } from './schemas/movie';
 
 function makeDbConnection(connectionString: string) {
     const dbConnection = createConnection(connectionString, 
@@ -14,10 +15,11 @@ function makeDbConnection(connectionString: string) {
 
     const User = dbConnection.model<UserModel>('user', userSchema, 'users');
     const Comment = dbConnection.model<CommentModel>('comment', commentSchema, 'comments');
+    const Movie = dbConnection.model<MovieModel>('movie', movieSchema, 'movies');
 
-    return { User, Comment };
+    return { User, Comment, Movie };
 }
 
-const { User, Comment } = makeDbConnection(DB_CONNECTION);
+const { User, Comment, Movie } = makeDbConnection(DB_CONNECTION);
 
-export { User, Comment }
+export { User, Comment, Movie }
